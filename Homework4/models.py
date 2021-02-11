@@ -1,8 +1,23 @@
 class Employee(object):
-    def __init__(self, name, email, salary):
+    def __init__(self, name, email, salary, save_email=False):
         self.name = name
         self.email = email
         self.salary_for_day = salary
+        if save_email:
+            self._save_email()
+
+    def _save_email(self):
+        try:
+            with open('email.txt') as f:
+                email_in_bd = f.read().split('\n')
+                for email in email_in_bd:
+                    if email == self.email:
+                        raise ValueError
+        except ValueError:
+            print("This email has been registered!")
+        else:
+            with open('email.txt', 'a') as f:
+                f.write(self.email + '\n')
 
     def work(self):
         return "I come to the office."
@@ -30,15 +45,22 @@ class Candidate(object):
     main_skill = ''
     main_skill_grade = ''
 
-    def __init__(self, full_name, email, technologies)
+    def __init__(self, full_name, email, technologies):
         self.full_name = full_name
         self.email = email
         self.technologies = technologies
+
+    def work(self):
+        raise UnableToWorkException("I'm not hired yet, lol.")
 
 
 class Vacancy(object):
     main_skill = ''
     main_skill_level = ''
 
-    def __init__(self, title='Python')
+    def __init__(self, title='Python'):
         self.title = title
+
+
+class UnableToWorkException(Exception):
+    pass

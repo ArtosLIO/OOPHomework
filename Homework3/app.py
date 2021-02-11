@@ -10,3 +10,7 @@ def main():
     candidate_ruslan = Candidate('Ruslan', 'ruslan@gmail.com', 'Front end')
     vacancy_python = Vacancy('Python')
     vacancy_front_end = Vacancy('Front end')
+
+
+if __name__ == '__main__':
+	main()
